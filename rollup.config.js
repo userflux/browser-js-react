@@ -17,8 +17,10 @@ export default {
 	],
 	external: ["react"], // Declares React as an external dependency
 	plugins: [
-		resolve(), // Helps Rollup find external modules
-		commonjs(), // Converts CommonJS modules to ES6
+		resolve({
+			extensions: [".js", ".jsx"],
+		}),
+		commonjs(),
 		babel({
 			babelHelpers: "bundled",
 			exclude: "node_modules/**",

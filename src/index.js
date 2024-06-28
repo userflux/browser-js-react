@@ -934,4 +934,8 @@ class UserFlux {
 	}
 }
 
-module.exports = UserFlux
+import { UserFluxProvider, useUserFlux } from "./useUserFlux"
+
+module.exports.UserFlux = UserFlux
+module.exports.UserFluxProvider = UserFluxProvider
+module.exports.useUserFlux = useUserFlux

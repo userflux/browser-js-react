@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useCallback } from "react"
-import UserFlux from "./index"
+import { UserFlux } from "./index"
 
 const UserFluxContext = createContext(null)
 
