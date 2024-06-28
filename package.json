@@ -1,11 +1,17 @@
 {
 	"name": "@userflux/browser-js-react",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "UserFlux's React SDK - send your frontend analytics data to the UserFlux platform",
-	"main": "index.js",
+	"main": "dist/index.js",
+	"module": "dist/index.esm.js",
+	"files": [
+		"dist"
+	],
 	"types": "index.d.ts",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "babel src --out-dir dist --extensions \".js,.jsx\"",
+		"prepare": "npm run build"
 	},
 	"repository": {
 		"type": "git",
@@ -30,5 +36,11 @@
 	},
 	"peerDependencies": {
 		"react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+	},
+	"devDependencies": {
+		"@babel/cli": "^7.24.7",
+		"@babel/core": "^7.24.7",
+		"@babel/preset-env": "^7.24.7",
+		"@babel/preset-react": "^7.24.7"
 	}
 }

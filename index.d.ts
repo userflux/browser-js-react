@@ -1,18 +1,11 @@
-// index.d.ts
-import { ReactNode } from "react"
+import { ReactNode, Context } from "react"
 
-declare module "@userflux/browser-js" {
-	declare class UserFlux {
-		static initialize(apiKey: string, options: object): void
-		static identify(parameters: object): Promise<any>
-		static track(parameters: object): Promise<any | null>
-		static trackBatch(parameters: object[]): Promise<void>
-		static reset(): Promise<void>
-		static updateDefaultTrackingProperties(properties: object): void
-		static getUserId(): string | null
-		static getAnonymousId(): string | null
-		static flush(): Promise<void>
-		static trackPageView(): Promise<void>
+declare module "@userflux/browser-js-react" {
+	interface UserFluxOptions {
+		autoCapture?: string[]
+		allowCookies?: boolean
+		autoEnrich?: boolean
+		[key: string]: any
 	}
 
 	interface UserFluxContextValue {
@@ -27,17 +20,28 @@ declare module "@userflux/browser-js" {
 		trackPageView: () => Promise<void>
 	}
 
-	export function UserFluxProvider({
-		writeKey,
-		options,
-		children,
-	}: {
+	interface UserFluxProviderProps {
 		writeKey: string
-		options: object
+		options: UserFluxOptions
 		children: ReactNode
-	}): JSX.Element
+	}
+
+	export const UserFluxContext: Context<UserFluxContextValue>
+
+	export function UserFluxProvider(props: UserFluxProviderProps): JSX.Element
 
 	export function useUserFlux(): UserFluxContextValue
 
-	export { UserFlux }
+	export class UserFlux {
+		static initialize(apiKey: string, options: UserFluxOptions): void
+		static identify(parameters: object): Promise<any>
+		static track(parameters: object): Promise<any | null>
+		static trackBatch(parameters: object[]): Promise<void>
+		static reset(): Promise<void>
+		static updateDefaultTrackingProperties(properties: object): void
+		static getUserId(): string | null
+		static getAnonymousId(): string | null
+		static flush(): Promise<void>
+		static trackPageView(): Promise<void>
+	}
 }
