@@ -9,7 +9,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/userflux/browser-js.git"
+		"url": "git+https://github.com/userflux/browser-js-react.git"
 	},
 	"keywords": [
 		"userflux",
@@ -22,9 +22,9 @@
 	"author": "UserFlux",
 	"license": "ISC",
 	"bugs": {
-		"url": "https://github.com/userflux/browser-js/issues"
+		"url": "https://github.com/userflux/browser-js-react/issues"
 	},
-	"homepage": "https://github.com/userflux/browser-js#readme",
+	"homepage": "https://github.com/userflux/browser-js-react#readme",
 	"dependencies": {
 		"cross-fetch": "^4.0.0"
 	},
