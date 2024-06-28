@@ -17,6 +17,7 @@ class UserFlux {
 
 	static initialize(apiKey, options) {
 		try {
+			console.info("Initializing UserFlux SDK")
 			UserFlux.ufApiKey = apiKey
 
 			if ("allowCookies" in options && options["allowCookies"] == true) {

@@ -1,11 +1,17 @@
-import React, { createContext, useContext, useEffect, useCallback } from "react"
+import React, { createContext, useContext, useEffect, useCallback, useRef } from "react"
 import { UserFlux } from "./index"
 
 const UserFluxContext = createContext(null)
 
 export function UserFluxProvider({ writeKey, options, children }) {
+	const isInitialized = useRef(false)
+
 	useEffect(() => {
-		UserFlux.initialize(writeKey, options)
+		if (!isInitialized.current) {
+			UserFlux.initialize(writeKey, options)
+			isInitialized.current = true
+		}
+
 		return () => {
 			// Clean up if necessary
 		}
