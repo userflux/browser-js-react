@@ -254,9 +254,41 @@ class UserFlux {
 			return
 		}
 
+		// Track page show (e.g., back/forward navigation)
 		window.addEventListener("pageshow", (event) => {
 			UserFlux.trackPageView()
 		})
+
+		// Track history changes (works for both regular navigation and SPAs)
+		let lastHistoryState = window.history.state
+		let lastPathname = window.location.pathname
+
+		const historyWatcher = () => {
+			const currentState = window.history.state
+			const currentPathname = window.location.pathname
+
+			if (currentState !== lastHistoryState || currentPathname !== lastPathname) {
+				UserFlux.trackPageView()
+				lastHistoryState = currentState
+				lastPathname = currentPathname
+			}
+		}
+
+		// Watch for pushState and replaceState calls
+		const originalPushState = window.history.pushState
+		window.history.pushState = function () {
+			originalPushState.apply(this, arguments)
+			historyWatcher()
+		}
+
+		const originalReplaceState = window.history.replaceState
+		window.history.replaceState = function () {
+			originalReplaceState.apply(this, arguments)
+			historyWatcher()
+		}
+
+		// Watch for popstate event (triggered by back/forward navigation)
+		window.addEventListener("popstate", historyWatcher)
 	}
 
 	static setupPageLeaveListener() {
