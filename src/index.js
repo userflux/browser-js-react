@@ -17,7 +17,6 @@ class UserFlux {
 
 	static initialize(apiKey, options) {
 		try {
-			console.info("Initializing UserFlux SDK")
 			UserFlux.ufApiKey = apiKey
 
 			if ("allowCookies" in options && options["allowCookies"] == true) {
@@ -253,6 +252,9 @@ class UserFlux {
 		if (typeof window === "undefined") {
 			return
 		}
+
+		// Track initial
+		UserFlux.trackPageView()
 
 		// Track page show (e.g., back/forward navigation)
 		window.addEventListener("pageshow", (event) => {
