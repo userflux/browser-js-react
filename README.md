@@ -19,7 +19,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"))
 root.render(
 	<React.StrictMode>
 		<UserFluxProvider
-			writeKey="agZZ5wjzMCOcG3RfwKHV86ksBy8LAmdp3_jxGJtGyeo"
+			writeKey="YOUR WRITE ONLY API KEY"
 			options={{
 				autoCapture: ["page_views", "clicks"],
 				allowCookies: true,
