@@ -17,6 +17,12 @@ class UserFlux {
 
 	static initialize(apiKey, options) {
 		try {
+			const shouldDisableCommonBotsBlocking = "blockCommonBots" in options && options["blockCommonBots"] == false
+			if (!shouldDisableCommonBotsBlocking && UserFlux.isBotUserAgent(window.navigator.userAgent)) {
+				console.info("Common bot detected. UserFlux SDK will not initialize.")
+				return
+			}
+
 			UserFlux.ufApiKey = apiKey
 
 			if ("allowCookies" in options && options["allowCookies"] == true) {
@@ -966,6 +972,64 @@ class UserFlux {
 	// Used for cleaning up the properties object of a event before tracking
 	static removeNullProperties(object) {
 		return Object.fromEntries(Object.entries(object).filter(([key, value]) => value !== null))
+	}
+
+	static isBotUserAgent(userAgent) {
+		// Convert to lowercase for case-insensitive matching
+		const lowerUA = userAgent.toLowerCase()
+
+		// Check for empty or missing user agent, if so, assume it's not a bot
+		if (!userAgent || userAgent.trim() === "") {
+			return false
+		}
+
+		// List of common bot keywords
+		const botKeywords = [
+			"bot",
+			"crawler",
+			"spider",
+			"scraper",
+			"indexer",
+			"archiver",
+			"slurp",
+			"googlebot",
+			"bingbot",
+			"yandexbot",
+			"duckduckbot",
+			"baiduspider",
+			"twitterbot",
+			"facebookexternalhit",
+			"linkedinbot",
+			"msnbot",
+			"slackbot",
+			"telegrambot",
+			"applebot",
+			"pingdom",
+			"ia_archiver",
+			"semrushbot",
+			"ahrefsbot",
+			"monotybot",
+		]
+
+		// Check for bot keywords
+		for (const keyword of botKeywords) {
+			if (lowerUA.includes(keyword)) {
+				return true
+			}
+		}
+
+		// Check for common bot patterns
+		if (
+			/(?:^|\W)spider(?:$|\W)/i.test(userAgent) ||
+			/(?:^|\W)crawl(?:er|ing)(?:$|\W)/i.test(userAgent) ||
+			/(?:^|\W)bot(?:$|\W)/i.test(userAgent) ||
+			/\+https?:\/\//i.test(userAgent)
+		) {
+			return true
+		}
+
+		// If none of the above conditions are met, it's likely not a bot
+		return false
 	}
 }
 
