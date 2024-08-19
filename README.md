@@ -53,6 +53,7 @@ The `initialize` method takes two arguments:
     -   `trackSession` - A boolean indicating whether or not to track sessions with an unique identifier. Defaults to `true`
     -   `customQueryParamsToCollect` - An array of strings used to define which custom query parameters to auto collect and include in event properties. Defaults to none.
     -   `disableUserIdStorage` - A boolean indicating whether or not to store the provided user id in storage. Defaults to `false`
+    -   `blockCommonBots` - A boolean indicating whether or not to block common bots from being tracked. Defaults to `true`
 
 ## 3. Tracking events
 
