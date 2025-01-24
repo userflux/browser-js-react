@@ -1,6 +1,6 @@
 {
 	"name": "@userflux/browser-js-react",
-	"version": "1.4.7",
+	"version": "1.4.8",
 	"description": "UserFlux's React SDK - send your frontend analytics data to the UserFlux platform",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
