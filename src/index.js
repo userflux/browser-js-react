@@ -361,7 +361,7 @@ class UserFlux {
 			properties: {
 				...filteredProperties,
 			},
-			addToQueue: false,
+			addToQueue: true,
 		})
 	}
 
@@ -371,7 +371,7 @@ class UserFlux {
 			properties: {
 				...UserFlux.getPageProperties(),
 			},
-			addToQueue: false,
+			addToQueue: true,
 		})
 	}
 
@@ -653,8 +653,15 @@ class UserFlux {
 			return
 		}
 
-		await UserFlux.sendRequest(eventType, { events: queue.splice(0, 10) })
-		UserFlux.saveEventsToStorage(`uf-track`, queue)
+		const eventsToTrack = queue.splice(0, 10)
+		const success = await UserFlux.sendRequest(eventType, { events: eventsToTrack })
+		if (success) {
+			UserFlux.saveEventsToStorage(`uf-track`, queue)
+		} else {
+			// If the request fails, add the events back to the queue
+			queue.push(...eventsToTrack)
+			UserFlux.saveEventsToStorage(`uf-track`, queue)
+		}
 
 		// If the queue is not empty, check it again
 		if (queue.length > 0) {
