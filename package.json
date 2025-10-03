@@ -1,16 +1,16 @@
 {
 	"name": "@userflux/browser-js-react",
-	"version": "1.5.3",
+	"version": "1.5.4",
 	"description": "UserFlux's React SDK - send your frontend analytics data to the UserFlux platform",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
 	"files": [
 		"dist"
 	],
-	"types": "index.d.ts",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "babel src --out-dir dist --extensions \".js,.jsx\"",
+		"build": "babel src --out-dir dist --extensions \".js,.jsx\" && cp src/index.d.ts dist/index.d.ts",
 		"prepare": "npm run build"
 	},
 	"repository": {
