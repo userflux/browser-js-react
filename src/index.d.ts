@@ -1,14 +1,14 @@
 import { ReactNode, Context } from "react"
 
 declare module "@userflux/browser-js-react" {
-	interface UserFluxOptions {
+	export interface UserFluxOptions {
 		autoCapture?: string[]
 		allowCookies?: boolean
 		autoEnrich?: boolean
 		[key: string]: any
 	}
 
-	interface UserFluxContextValue {
+	export interface UserFluxContextValue {
 		identify: (parameters: object) => Promise<any>
 		track: (parameters: object) => Promise<any | null>
 		trackBatch: (events: object[]) => Promise<void>
@@ -20,7 +20,7 @@ declare module "@userflux/browser-js-react" {
 		trackPageView: () => Promise<void>
 	}
 
-	interface UserFluxProviderProps {
+	export interface UserFluxProviderProps {
 		writeKey: string
 		options: UserFluxOptions
 		children: ReactNode

@@ -7,10 +7,10 @@
 	"files": [
 		"dist"
 	],
-	"types": "index.d.ts",
+	"types": "dist/index.d.ts",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "babel src --out-dir dist --extensions \".js,.jsx\"",
+		"build": "babel src --out-dir dist --extensions \".js,.jsx\" && cp src/index.d.ts dist/index.d.ts",
 		"prepare": "npm run build"
 	},
 	"repository": {
