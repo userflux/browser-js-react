@@ -1,6 +1,6 @@
 {
 	"name": "@userflux/browser-js-react",
-	"version": "1.5.5",
+	"version": "1.5.6",
 	"description": "UserFlux's React SDK - send your frontend analytics data to the UserFlux platform",
 	"main": "dist/index.js",
 	"module": "dist/index.esm.js",
@@ -35,7 +35,7 @@
 		"cross-fetch": "^4.0.0"
 	},
 	"peerDependencies": {
-		"react": "^16.8.0 || ^17.0.0 || ^18.0.0"
+		"react": "^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0"
 	},
 	"devDependencies": {
 		"@babel/cli": "^7.24.7",
