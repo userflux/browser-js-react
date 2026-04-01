@@ -274,9 +274,11 @@ class UserFlux {
 		// Track initial
 		UserFlux.trackPageView()
 
-		// Track page show (e.g., back/forward navigation)
+		// Track page show from back/forward cache restoration
 		window.addEventListener("pageshow", async (event) => {
-			await UserFlux.trackPageView()
+			if (event.persisted) {
+				await UserFlux.trackPageView()
+			}
 		})
 
 		// Track history changes (works for both regular navigation and SPAs)
